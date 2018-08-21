@@ -40,9 +40,9 @@ function displayGifs() {
             cartoonDiv.append(cartoonImage);
             //Prepend the cartoonDiv to the cartoon-appear-here div
             $("#cartoons-appear-here").prepend(cartoonDiv);
-        }
+        };
     });
-}
+};
 
 //Function to display buttons for topics array
 function renderButtons() {
@@ -61,8 +61,19 @@ function renderButtons() {
         button.text(topics[i]);
         //Add the buttons to the cartoonButtons div
         $("#cartoonButtons").append(button);
-    }
-}
+    };
+};
+
+//Function to add user input into topics array and create a button for it
+$("#addCartoon").on("click", function(event) {
+    event.preventDefault();
+    //Get the value of what the user entered
+    var userInput = $("#cartoon-input").val().trim();
+    //Push the input to the topics array
+    topics.push(userInput);
+    //Call renderButtons to display new button
+    renderButtons();
+});
 
 //Adding click event listener to all elements with class of "cartoon-btn" and calling displayGifs function
 $(document).on("click", ".cartoon-btn", displayGifs);
