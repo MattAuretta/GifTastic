@@ -23,7 +23,7 @@ function displayGifs() {
         console.log(results);
 
         //Create loop to display each result
-        for(var i = 0; i < results.length; i++){
+        for (var i = 0; i < results.length; i++) {
             //Create div to store gif/rating/etc
             var cartoonDiv = $("<div>").addClass("cartoonDiv");
             //Create paragraph
@@ -31,9 +31,14 @@ function displayGifs() {
             //Set the paragraph to the rating of the gif
             p.text("Rating: " + results[i].rating);
             //Make an image tag
-            var cartoonImage = $("<img>").addClass("img-fluid");
-            //Set the results image to the img tag just created
-            cartoonImage.attr("src", results[i].images.fixed_height.url);
+            var cartoonImage = $("<img>").addClass("img-fluid gif");
+            //Set the results still image to the img tag just created
+            cartoonImage.attr("src", results[i].images.fixed_height_still.url);
+            //Add data-still and data-animate attributes to cartoonImage
+            cartoonImage.attr("data-still", results[i].images.fixed_height_still.url);
+            cartoonImage.attr("data-animate", results[i].images.fixed_height.url);
+            //Add attribute of data-state and set to still
+            cartoonImage.attr("data-state", "still");
             //Append the p to the cartoonDiv
             cartoonDiv.append(p);
             //Append the cartoonImage to the cartoonDiv
@@ -41,6 +46,26 @@ function displayGifs() {
             //Prepend the cartoonDiv to the cartoon-appear-here div
             $("#cartoons-appear-here").prepend(cartoonDiv);
         };
+        //Function to play and pause gifs
+        $(".gif").on("click", function () {
+            // Create variable to hold data-state
+            var state = $(this).attr("data-state");
+
+            // If statement to check if data-state is equal to still
+            if (state == "still") {
+                //Change data-state attribute to animate
+                $(this).attr("data-state", "animate");
+                //Change img source to value of data-animate
+                $(this).attr("src", $(this).attr("data-animate"));
+
+            } else {
+                //Change data-state attribute to still
+                $(this).attr("data-state", "still");
+                //Change img source to value of data-still
+                $(this).attr("src", $(this).attr("data-still"));
+
+            }
+        })
     });
 };
 
@@ -65,7 +90,7 @@ function renderButtons() {
 };
 
 //Function to add user input into topics array and create a button for it
-$("#addCartoon").on("click", function(event) {
+$("#addCartoon").on("click", function (event) {
     event.preventDefault();
     //Get the value of what the user entered
     var userInput = $("#cartoon-input").val().trim();
