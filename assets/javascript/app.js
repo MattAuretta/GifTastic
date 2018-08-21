@@ -3,9 +3,12 @@ var topics = ["Mickey Mouse", "Spongebob", "Futurama", "Looney Tunes", "The Simp
 
 //Function that renders the HTML to display gifs
 function displayGifs() {
+
+    //Create variable that holds data-attribute of button that was clicked
     var cartoon = $(this).attr("data-name");
     var queryURL = "https://api.giphy.com/v1/gifs/search";
 
+    //Creating AJAX call 
     $.ajax({
         url: queryURL,
         method: "GET",
@@ -15,7 +18,29 @@ function displayGifs() {
             limit: 10,
         }
     }).then(function (response) {
-        console.log(response);
+        //Create variable for information stored inside data key
+        var results = response.data;
+        console.log(results);
+
+        //Create loop to display each result
+        for(var i = 0; i < results.length; i++){
+            //Create div to store gif/rating/etc
+            var cartoonDiv = $("<div>").addClass("cartoonDiv");
+            //Create paragraph
+            var p = $("<p>");
+            //Set the paragraph to the rating of the gif
+            p.text("Rating: " + results[i].rating);
+            //Make an image tag
+            var cartoonImage = $("<img>").addClass("img-fluid");
+            //Set the results image to the img tag just created
+            cartoonImage.attr("src", results[i].images.fixed_height.url);
+            //Append the p to the cartoonDiv
+            cartoonDiv.append(p);
+            //Append the cartoonImage to the cartoonDiv
+            cartoonDiv.append(cartoonImage);
+            //Prepend the cartoonDiv to the cartoon-appear-here div
+            $("#cartoons-appear-here").prepend(cartoonDiv);
+        }
     });
 }
 
