@@ -46,26 +46,6 @@ function displayGifs() {
             //Prepend the cartoonDiv to the cartoon-appear-here div
             $("#cartoons-appear-here").prepend(cartoonDiv);
         };
-        //Function to play and pause gifs
-        $(".gif").on("click", function () {
-            // Create variable to hold data-state
-            var state = $(this).attr("data-state");
-
-            // If statement to check if data-state is equal to still
-            if (state == "still") {
-                //Change data-state attribute to animate
-                $(this).attr("data-state", "animate");
-                //Change img source to value of data-animate
-                $(this).attr("src", $(this).attr("data-animate"));
-
-            } else {
-                //Change data-state attribute to still
-                $(this).attr("data-state", "still");
-                //Change img source to value of data-still
-                $(this).attr("src", $(this).attr("data-still"));
-
-            }
-        })
     });
 };
 
@@ -99,6 +79,26 @@ $("#addCartoon").on("click", function (event) {
     //Call renderButtons to display new button
     renderButtons();
 });
+
+//Function to play and pause gifs
+$(document).on("click", ".gif", function () {
+    // Create variable to hold data-state
+    var state = $(this).attr("data-state");
+
+    // If statement to check if data-state is equal to still
+    if (state == "still") {
+        //Change data-state attribute to animate
+        $(this).attr("data-state", "animate");
+        //Change img source to value of data-animate
+        $(this).attr("src", $(this).attr("data-animate"));
+
+    } else {
+        //Change data-state attribute to still
+        $(this).attr("data-state", "still");
+        //Change img source to value of data-still
+        $(this).attr("src", $(this).attr("data-still"));
+    }
+})
 
 //Adding click event listener to all elements with class of "cartoon-btn" and calling displayGifs function
 $(document).on("click", ".cartoon-btn", displayGifs);

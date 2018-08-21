@@ -1,4 +1,35 @@
+body {
+    background-color: #fffff0;
+    font-size: 1.1em;
+}
+
 .cartoonDiv {
     display: inline-block;
     text-transform: uppercase;
 }
+
+.cartoon-btn,
+#addCartoon {
+    margin: 0.3em;
+    border-radius: 0.5em;
+    border: none;
+    background-color: #23fff4;
+    box-shadow: 0.3em 0.2em 0.2em #1bbbb3;
+}
+
+.cartoon-btn:hover,
+#addCartoon:hover {
+    cursor: pointer;
+    background-color: #1bbbb3;
+    box-shadow: 0.3em 0.2em 0.2em #179b94;
+}
+
+.cartoon-btn:active,
+#addCartoon:active {
+    background-color: #127a75;
+}
+
+.cartoon-btn:focus {
+    outline: 0;
+}
+
