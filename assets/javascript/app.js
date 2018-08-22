@@ -43,10 +43,19 @@ function displayGifs() {
             cartoonImage.attr("data-animate", results[i].images.fixed_height.url);
             //Add attribute of data-state and set to still
             cartoonImage.attr("data-state", "still");
+            //Create download link
+            var downloadButton = $("<a>").addClass("download-button");
+            //Add text to download button
+            downloadButton.text("Download GIF");
+            //Add attributes to download button
+            downloadButton.attr("href", results[i].images.fixed_height.url);
+            downloadButton.attr("download", results[i].title);
             //Append the cartoonImage to the cartoonDiv
             cartoonDiv.append(cartoonImage);
             //Append the p to the cartoonDiv
             cartoonDiv.append(p);
+            //Append download button to the rating paragraph
+            p.append(downloadButton);
             //Prepend the cartoonDiv to the cartoon-appear-here div
             $("#cartoons-appear-here").prepend(cartoonDiv);
         };
