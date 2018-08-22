@@ -43,10 +43,10 @@ function displayGifs() {
             cartoonImage.attr("data-animate", results[i].images.fixed_height.url);
             //Add attribute of data-state and set to still
             cartoonImage.attr("data-state", "still");
-            //Append the p to the cartoonDiv
-            cartoonDiv.append(p);
             //Append the cartoonImage to the cartoonDiv
             cartoonDiv.append(cartoonImage);
+            //Append the p to the cartoonDiv
+            cartoonDiv.append(p);
             //Prepend the cartoonDiv to the cartoon-appear-here div
             $("#cartoons-appear-here").prepend(cartoonDiv);
         };
