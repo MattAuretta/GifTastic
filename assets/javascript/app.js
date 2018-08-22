@@ -1,6 +1,9 @@
 //Create initial array of cartoons
 var topics = ["Mickey Mouse", "Spongebob", "Futurama", "Looney Tunes", "The Simpsons", "Adventure Time", "Hey Arnold", "Rick and Morty", "Dexter's Lab", "CatDog", "Pokemon", "Pinky and the Brain", "Beavis and Butthead", "Dragon Ball Z"];
 
+//Create variable to hold value for offset
+var newGifs = 0;
+
 //Function that renders the HTML to display gifs
 function displayGifs() {
 
@@ -16,6 +19,7 @@ function displayGifs() {
             api_key: "vPp9MKW3v2lgQjuvIvyviOQlxSl9Z9ar",
             q: cartoon,
             limit: 10,
+            offset: newGifs,
         }
     }).then(function (response) {
         //Create variable for information stored inside data key
@@ -46,6 +50,8 @@ function displayGifs() {
             //Prepend the cartoonDiv to the cartoon-appear-here div
             $("#cartoons-appear-here").prepend(cartoonDiv);
         };
+        //Add 10 to the offset value so we get 10 new gifs
+        newGifs += 10;
     });
 };
 
@@ -78,6 +84,8 @@ $("#addCartoon").on("click", function (event) {
     topics.push(userInput);
     //Call renderButtons to display new button
     renderButtons();
+    //Empty the form
+    $("#cartoon-input").val("");
 });
 
 //Function to play and pause gifs
