@@ -64,6 +64,26 @@ function displayGifs() {
     });
 };
 
+function displayCartoonInfo () {
+    var cartoonInfo = $(this).attr("data-name");
+    var queryURL = "https://www.omdbapi.com/";
+
+    $.ajax({
+        url: queryURL,
+        method: "GET",
+        data: {
+            apikey: "4883e967",
+            t: cartoonInfo,
+            
+        }
+    }).then(function(response){
+        console.log(response);
+        var ratings = $("<p>");
+        ratings.text("IMDb Rating for " + response.Title + " : " + response.imdbRating)
+        $("#ratings-appear-here").html(ratings);
+    })
+}
+
 //Function to display buttons for topics array
 function renderButtons() {
     //Prevents repeat buttons
@@ -119,6 +139,7 @@ $(document).on("click", ".gif", function () {
 
 //Adding click event listener to all elements with class of "cartoon-btn" and calling displayGifs function
 $(document).on("click", ".cartoon-btn", displayGifs);
+$(document).on("click", ".cartoon-btn", displayCartoonInfo);
 
 //Calling renderButtons function to display initial topics array
 renderButtons();
