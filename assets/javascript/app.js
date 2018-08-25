@@ -1,5 +1,5 @@
 //Create initial array of cartoons
-var topics = ["Mickey Mouse", "Spongebob", "Futurama", "Looney Tunes", "The Simpsons", "Adventure Time", "Hey Arnold", "Rick and Morty", "Dexter's Lab", "CatDog", "Pokemon", "Pinky and the Brain", "Beavis and Butthead", "Dragon Ball Z"];
+var topics = ["Mickey Mouse", "Spongebob", "Futurama", "Looney Tunes", "The Simpsons", "Adventure Time", "Hey Arnold", "Rick and Morty", "Dexter's Lab", "CatDog", "Tom and Jerry", "Pinky and the Brain", "Beavis and Butthead", "Dragon Ball Z"];
 
 //Create variable to hold value for offset
 var newGifs = 0;
@@ -24,7 +24,6 @@ function displayGifs() {
     }).then(function (response) {
         //Create variable for information stored inside data key
         var results = response.data;
-        console.log(results);
 
         //Create loop to display each result
         for (var i = 0; i < results.length; i++) {
@@ -64,7 +63,8 @@ function displayGifs() {
     });
 };
 
-function displayCartoonInfo () {
+//Function to call omdb API
+function displayCartoonInfo() {
     var cartoonInfo = $(this).attr("data-name");
     var queryURL = "https://www.omdbapi.com/";
 
@@ -74,12 +74,19 @@ function displayCartoonInfo () {
         data: {
             apikey: "4883e967",
             t: cartoonInfo,
-            
+
         }
-    }).then(function(response){
-        console.log(response);
+    }).then(function (response) {
+        //Create paragraph and assign to variable
         var ratings = $("<p>");
-        ratings.text("IMDb Rating for " + response.Title + " : " + response.imdbRating)
+        //If no ratings found
+        if (response.imdbRating == null) {
+            ratings.text("IMDb Rating Not Found! :(")
+        } else {
+            //Display ratings
+            ratings.text("IMDb Rating for " + response.Title + " : " + response.imdbRating)
+        }
+        //Push to html
         $("#ratings-appear-here").html(ratings);
     })
 }
