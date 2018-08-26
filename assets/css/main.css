@@ -64,6 +64,7 @@ body {
     position: absolute;
     top: 0.1em;
     left: 0.1em;
+    z-index: 1;
     color: #f00;
     animation: colorchange 0.9s infinite;
 }
