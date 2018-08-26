@@ -6,7 +6,10 @@ body {
 .cartoonDiv {
     display: inline-block;
     text-transform: uppercase;
+    position: relative;
 }
+
+/* Button Styles */
 
 .cartoon-btn,
 #addCartoon {
@@ -52,4 +55,24 @@ body {
 
 .download-button:active {
     background-color: #127a75;
+}
+
+/* Favorite Icon */
+
+.favorite {
+    display: inline-block;
+    position: absolute;
+    top: 0.1em;
+    left: 0.1em;
+    color: #f00;
+    animation: colorchange 0.9s infinite;
+}
+
+@keyframes colorchange {
+    10% {color: #f00;}
+    100% {color: #8b0000;}
+}
+
+.favorite:hover {
+    cursor: pointer;
 }

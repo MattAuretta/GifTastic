@@ -49,12 +49,16 @@ function displayGifs() {
             //Add attributes to download button
             downloadButton.attr("href", results[i].images.fixed_height.url);
             downloadButton.attr("download", results[i].title);
+            //Create favorite button
+            var favorite = $("<i>").addClass("fas fa-heart favorite")
             //Append the cartoonImage to the cartoonDiv
             cartoonDiv.append(cartoonImage);
             //Append the p to the cartoonDiv
             cartoonDiv.append(p);
             //Append download button to the rating paragraph
             p.append(downloadButton);
+            //Append favorite icon to cartoonDiv
+            cartoonDiv.append(favorite);
             //Prepend the cartoonDiv to the cartoon-appear-here div
             $("#cartoons-appear-here").prepend(cartoonDiv);
         };
@@ -144,9 +148,21 @@ $(document).on("click", ".gif", function () {
     }
 })
 
-//Adding click event listener to all elements with class of "cartoon-btn" and calling displayGifs function
+//Function to move gifs over to favorites
+function makeFavorite() {
+    //Create variable that selects CartoonDiv via favorite button
+    var newFavorite = $(this).parent()[0];
+    //Add to the favorites div
+    $("#favorites-appear-here").prepend(newFavorite);
+    //Remove heart icon
+    newFavorite.removeChild(newFavorite.childNodes[2]);
+}
+
+//Adding click event listener to all elements with class of "cartoon-btn" and calling displayGifs/displayCartoonInfo function
 $(document).on("click", ".cartoon-btn", displayGifs);
 $(document).on("click", ".cartoon-btn", displayCartoonInfo);
+//Adding click event listener on all favorite buttons to call makeFavorite function
+$(document).on("click", ".favorite", makeFavorite);
 
 //Calling renderButtons function to display initial topics array
 renderButtons();
